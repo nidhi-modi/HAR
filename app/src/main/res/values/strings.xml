@@ -1,0 +1,325 @@
+<resources>
+    <string name="app_name">Quality Sheet</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="lbl_job_name">Select Job</string>
+    <string name="lbl_enter_data">Enter Job Details</string>
+    <string name="lbl_auditor_name">Select Auditor Name</string>
+    <string name="lbl_row_number">Row Number</string>
+    <string name="lbl_week_number">Select Week Number</string>
+    <string name="lbl_house_number">Select House Number</string>
+    <string name="permission_rationale">Please grant all permissions to proceed</string>
+
+    <string name="noti_channel_id">tandg.qualitysheet</string>
+
+
+    //---------------------COMMON--------------------------------
+    <string name="lbl_worker_name">Name</string>
+    <string name="lbl_comments_hint">Enter comments if needed</string>
+    <string name="lbl_submit">Submit</string>
+    <string name="lbl_yes">Pass</string>
+    <string name="lbl_no">Fail</string>
+    <string name="lbl_quality_display">Last Quality Percentage : </string>
+
+    //-------------------CLIPPING-------------------------------
+    <string name="lbl_clipping_data1">1) Clip position: not above a truss/one clip between truss/half twist <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_clipping_data2">2) Broken heads and trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_data3">3) Broken heads replaced and bobbin hung <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_clipping_data4">4) Laterals: take laterals from previous clip to the head, fail if larger than finger nail <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_data5">5) Comments \neg: 10 broken heads, no half twist, clipping height poor, needs training</string>
+
+
+    //-------------------DROPPING-------------------------------
+    <string name="lbl_dropping_data1">1) Spacing: heads levelled and vines going down are spaced <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_dropping_data2">2) Angle is correct - drop and shift the same - Cubes not ripped <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_dropping_data3">3) Stems on the hoops, turning around properly <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_dropping_data4">4) Minimize floor fruit and broken trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_dropping_data5">5) Comments \neg: vines are braided and bunchy but heads are levelled well, turning at the fronts/ backs needs improvement</string>
+
+    //-------------------PRUNING-------------------------------
+    <string name="lbl_pruning_data1">1) Accuracy: prune to the correct number and remove flag leaf + King fruit <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_pruning_data2">2) Position of arch: proper <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_pruning_data3">3) Pruning and arching at the right stage. Arch: as long as it fits and doesn\'t touch last bud <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_pruning_data4">4) No broken trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_pruning_data5">5) Comments \neg: poor contact between arch and truss, arch too close fo the stem, pruning too hard</string>
+
+    //-------------------TWISTING-------------------------------
+    <string name="lbl_twisting_data1">1) Trusses and leaves not trapped, and not wound too much <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_twisting_data2">2) Broken heads and trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_twisting_data3">3) Broken heads replaced and bobbin hung <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_twisting_data4">4) Laterals: take laterals from previous twist to the head, fail if larger than finger nail <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_twisting_data5">5) Comments \neg: 10 broken heads, twisting the wrong way, needs training, trusses cught under string</string>
+
+    //-------------------DELEAFING-------------------------------
+    <string name="lbl_deleafing_data1">1) Clean cut - minimize stubs and bad cuts <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_deleafing_data2">2) Accuracy: correct range of leaves removed for whole line <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_deleafing_data3">3) Stem and middle laterals taken, stems on hoops <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_deleafing_data4">4) Laterals: no sliced fruit, minimizes broken trusses, dead plants reported <font fgcolor='#FFFF3B30'>(1 each)</font></string>
+    <string name="lbl_deleafing_data5">5) Comments \neg: sent back to fix stubs, sliced through a stem, string not cut</string>
+
+    //-------------------PICKING-------------------------------
+    <string name="lbl_picking_data1">1) No floor fruit <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_picking_data2">2) Colour stage and missing fruit <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_picking_data3">3) Fruit graded out: rotten, damaged, miss-set <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_picking_data4">4) No plant materials and calyx <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_picking_data5">5) Comments \neg: 10 broken heads, no half twist, clipping height poor, needs training</string>
+
+
+    //-------------------CLIPPING/PRUNING-------------------------------
+    <string name="lbl_clipping_pruning_data1">1) Clip position: not above a truss/one clip between truss/half twist <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_clipping_pruning_data2">2) Broken heads and trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data3">3) Broken heads replaced and bobbin hung <font fgcolor='#FFFF3B30'>(0)</font></string>
+    <string name="lbl_clipping_pruning_data4">4) Laterals: take laterals from previous clip to the head, fail if larger than finger nail <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data5">5) Accuracy: prune to the correct number and remove flag leaf + King fruit <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data6">6) Position of arch: proper <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data7">7) Pruning and arching at the right stage. Arch: as long as it fits and doesn\'t touch last bud <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data8">8) No broken trusses <font fgcolor='#FFFF3B30'>(3 each)</font></string>
+    <string name="lbl_clipping_pruning_data9">9) Comments \neg: 10 broken heads, no half twist, clipping height poor, needs training</string>
+
+
+
+    //-------------------HAR_NAMES-------------------------------
+
+    <string-array name="har_names">
+        <item>SELECT</item>
+        <item>Taufa Filiai</item>
+        <item>Carey Griffin</item>
+        <item>Logan Ward</item>
+        <item>Linda Jolly</item>
+        <item>Steven Ridealgh </item>
+        <item>Aroha Majoor</item>
+        <item>Merearna Asafo-Tavita</item>
+        <item>Savarna Asafo-Tavita</item>
+        <item>Toreka Baitau</item>
+        <item>Iri Edmonds</item>
+        <item>Lina Georges</item>
+        <item>Harry Green</item>
+        <item>Danny Kerkhoven</item>
+        <item>Anita Kira</item>
+        <item>Diseree Lagud</item>
+        <item>Archana Lakshmanan</item>
+        <item>Chaman Lal</item>
+        <item>Kimeata Lekasa</item>
+        <item>Trish Murray</item>
+        <item>Taanaki Namoriki</item>
+        <item>Poasa Panapa</item>
+        <item>Florence Pearson</item>
+        <item>Tia Rangihika</item>
+        <item>Zachariah Stelts</item>
+        <item>Baroko Tetuai</item>
+        <item>Fusi Tonga</item>
+        <item>Duane Tupaea</item>
+        <item>Alexander Hasselman-Black</item>
+        <item>Layla Borrington</item>
+        <item>Katelyn Cassidy</item>
+        <item>Gregory  Chown</item>
+        <item>Adolieta Fernando</item>
+        <item>Vanessa Hemopo</item>
+        <item>Mikey King</item>
+        <item>Beatrix Lambert</item>
+        <item>Nicho Lewis</item>
+        <item>Harpreet Singh</item>
+        <item>Sam Stewart</item>
+        <item>Jordan Stewart</item>
+        <item>Kingi Leaning</item>
+        <item>Teraaka Takenikeaki</item>
+        <item>Alexander Muller</item>
+        <item>Koata Takaeang</item>
+        <item>Tienako Tirua</item>
+        <item>Ruteta Beretitara</item>
+        <item>Tebuae Tabotabo</item>
+        <item>Iateru Babakai</item>
+        <item>Fakatou Atana</item>
+        <item>Siosifa Talakai</item>
+        <item>Koloti Ala</item>
+        <item>Sosaia Finefeuiaki</item>
+        <item>Asipeli Kulihaapai</item>
+        <item>Banikai Kautabuki</item>
+        <item>Tebanikaboki Moretekai</item>
+        <item>Tikoi Rerei</item>
+        <item>Teuota Kontirio</item>
+        <item>Tiotara Temare</item>
+        <item>Waabuti Ataia</item>
+        <item>Meere Eriki</item>
+        <item>Kibaria Kaukau</item>
+    </string-array>
+
+
+
+    //-------------------HAR_ADI-------------------------------
+
+    <string-array name="har_adi">
+        <item>SELECT</item>
+        <item>70049</item>
+        <item>200</item>
+        <item>90631</item>
+        <item>90105</item>
+        <item>97528</item>
+        <item>250</item>
+        <item>98909</item>
+        <item>96590</item>
+        <item>99288</item>
+        <item>70045</item>
+        <item>90812</item>
+        <item>70060</item>
+        <item>99100</item>
+        <item>93274</item>
+        <item>11304</item>
+        <item>98908</item>
+        <item>7670</item>
+        <item>98867</item>
+        <item>97619</item>
+        <item>97594</item>
+        <item>95618</item>
+        <item>99289</item>
+        <item>145</item>
+        <item>96239</item>
+        <item>98937</item>
+        <item>12291</item>
+        <item>11322</item>
+        <item>99892</item>
+        <item>99902</item>
+        <item>99893</item>
+        <item>99677</item>
+        <item>98839</item>
+        <item>99913</item>
+        <item>99895</item>
+        <item>99912</item>
+        <item>99669</item>
+        <item>99903</item>
+        <item>99894</item>
+        <item>98791</item>
+        <item>97399</item>
+        <item>98885</item>
+        <item>98887</item>
+        <item>98884</item>
+        <item>98883</item>
+        <item>98878</item>
+        <item>98879</item>
+        <item>98889</item>
+        <item>94977</item>
+        <item>99294</item>
+        <item>11580</item>
+        <item>99293</item>
+        <item>11914</item>
+        <item>90970</item>
+        <item>90185</item>
+        <item>93889</item>
+        <item>95738</item>
+        <item>95741</item>
+        <item>84739</item>
+        <item>97471</item>
+        <item>97472</item>
+    </string-array>
+
+
+    //-------------------GER_NAMES-------------------------------
+
+    <string-array name="ger_names">
+        <item>SELECT</item>
+        <item>Paul Haxby</item>
+        <item>Deep Singh </item>
+        <item>Nau Pesa </item>
+        <item>Melody Taylor</item>
+        <item>Tomasi Lama </item>
+        <item>Amy Bhana</item>
+        <item>Helen Brian </item>
+        <item>Sumita Chand </item>
+        <item>Melenau Feao</item>
+        <item>Paula Feao</item>
+        <item>Paea Filiai</item>
+        <item>Simione Filiai</item>
+        <item>Huia Flavell</item>
+        <item>Peter Hepi</item>
+        <item>Teiamaon Ieremia</item>
+        <item>Oliveti Lama</item>
+        <item>Eric Low</item>
+        <item>Craig Martin</item>
+        <item>Lise Maunana</item>
+        <item>Michael Miteti</item>
+        <item>Toutai Pakofe</item>
+        <item>Ngana Potesio </item>
+        <item>Waimatou Potini</item>
+        <item>Ram Harsangat</item>
+        <item>Roshni Singh</item>
+        <item>Paape Sotaga</item>
+        <item>Errol Straker</item>
+        <item>Kataua Tekitanga</item>
+        <item>Tafihi Toafa</item>
+        <item>Reanna Broome</item>
+        <item>Steve Bryan</item>
+        <item>Michelle Enqriquez</item>
+        <item>Hester Fourie </item>
+        <item>Keying He</item>
+        <item>Julie Kelly</item>
+        <item>Phillip Martin</item>
+        <item>Amend Singh</item>
+        <item>Laine Tavake</item>
+        <item>Jaya Vytla</item>
+        <item>Haieti Fakaosi</item>
+        <item>Semisi Wolfgram</item>
+        <item>Latu Vainga</item>
+        <item>Siosaia Unga</item>
+        <item>Timote Tonga</item>
+        <item>Taniela Hennessey</item>
+        <item>Tevita Mafua</item>
+        <item>Liufau Aukafolau</item>
+        <item>Ahi Sia I Moana Aukafolau</item>
+        <item>Kesomi Aukafolau</item>
+        <item>Sitiveni Vaivela</item>
+        <item>Lopeti Tulikihakau</item>
+        <item>Losimani Soakai </item>
+        <item>Alamoti Finau</item>
+        <item>Pauliasi Pakileata </item>
+        <item>Fakatele Taufa</item>
+        <item>Sione Tu\'itupou</item>
+        <item>Ulupano Lo</item>
+        <item>Naulivou Pangi</item>
+        <item>Folau Vaipapalangi</item>
+        <item>Ofila Tausisi</item>
+        <item>Folau Tausinga</item>
+        <item>Molisi Vaea</item>
+        <item>Asipeli Fetuu</item>
+        <item>Mosese Tuitupou</item>
+        <item>Atunaisa Aukafolau</item>
+        <item>Pesalili Vaea</item>
+        <item>Pita Huni</item>
+        <item>Patimana Finau</item>
+        <item>Manase Fainganuku</item>
+        <item>Phillip Martin</item>
+        <item>Hanllal Vailea</item>
+        <item>Sione Uliti Tualau</item>
+        <item>Viliami Teuteukuhelotu</item>
+        <item>Tevita Vaomotou</item>
+        <item>Lataimulinu\'u Tongatoutai</item>
+        <item>Vakavelo Ulinoa</item>
+        <item>Samiu Aholelei </item>
+        <item>Moala Paongo</item>
+        <item>Samiuela Latu</item>
+        <item>Pepa Aukafolau </item>
+        <item>Nulani Fifita</item>
+        <item>Rebecca Wilson </item>
+        <item>Aoniba Tabane </item>
+        <item>Banikai Kautabuki </item>
+        <item>Bungintai Taatonga </item>
+        <item>Marouea Takaree</item>
+        <item>Meere Beiariki</item>
+        <item>Kinateao Iran</item>
+        <item>Susi Tekaai</item>
+        <item>Tebaibure Tonginako </item>
+        <item>Tebanikaboki Moretekai</item>
+        <item>Tikoi Rerei</item>
+        <item>Temateao Tanako</item>
+        <item>Terenga Tebau</item>
+        <item>Teuota Kontrio </item>
+        <item>Tiotara Temare</item>
+        <item>Waabuti Ataia</item>
+        <item>Meere Eriki</item>
+        <item>Kibaria Kaukau</item>
+        <item>Moannara Tekaai </item>
+        <item>Taane Ioanne</item>
+
+    </string-array>
+
+
+</resources>
