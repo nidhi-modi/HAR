@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +47,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -58,22 +62,27 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
     @BindView(R.id.spin_auditor_name)              Spinner spinAuditorName;
     @BindView(R.id.spin_job_name)                  Spinner spinJobName;
     @BindView(R.id.spin_house_number)              Spinner spinHousenumber;
+    @BindView(R.id.spin_worker_name)               SearchableSpinner spinWorkerName;
+    @BindView(R.id.spin_adi_number)                Spinner spinAdiNumber;
 
 
     //@formatter:on
 
     private static ViewCallback viewSelectionCallback;
 
-    private String spinnerAuditorName, spinnerJobName, spinnerWeekNumber, spinnerHouseNumber;
-    private String auditorName, jobName, weekNumber, houseNumber;
+    private String spinnerAuditorName, spinnerJobName, spinnerWeekNumber, spinnerHouseNumber, spinnerWorkerName, spinnerAdiNumber;
+    private String auditorName, jobName, weekNumber, houseNumber, workerName1, adiNumber1;
+    ArrayList<String> WorkersName, ADICode;
+    ArrayList<String> ssCombinedData, ssPercentage;
+    private int                                         workerPosition, combinedPos;
     private boolean isAuditor = false;
     private boolean isWeekNumber = false;
     private boolean isHouseNumber = false;
 
 
-
     Handler handler;
     QualityInfoDataSource qualityInfoDataSource;
+
 
 
     @Override
@@ -96,19 +105,44 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
         spinJobName.setEnabled(false);
         spinHousenumber.setEnabled(false);
+        spinWorkerName.setEnabled(false);
+
+        WorkersName       = new ArrayList<>();
+        ADICode           = new ArrayList<>();
+        ssCombinedData    = new ArrayList<>();
+        ssPercentage      = new ArrayList<>();
 
 
         spinJobName.setOnItemSelectedListener(this);
         spinAuditorName.setOnItemSelectedListener(this);
         spinHousenumber.setOnItemSelectedListener(this);
-
+        spinAdiNumber.setOnItemSelectedListener(this);
+        spinWorkerName.setOnItemSelectedListener(this);
 
 
         spinnerWeekNumber = ApplicationUtils.getDateTime();
 
-        ApplicationUtils.hideKeypad(getApplicationContext(),spinJobName);
-        ApplicationUtils.hideKeypad(getApplicationContext(),spinAuditorName);
-        ApplicationUtils.hideKeypad(getApplicationContext(),spinHousenumber);
+        if(ApplicationUtils.isConnected(getApplicationContext())){
+
+            getItems();
+
+            getQualityPercentageFromSheet();
+
+
+        }else {
+
+            List<String> arrayList = Arrays.asList(getResources().getStringArray(R.array.har_names));
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.layout_spinner_label, arrayList);
+            arrayAdapter.setDropDownViewResource(R.layout.layout_spinner_label);
+            spinWorkerName.setAdapter(arrayAdapter);
+
+            List<String> arrayList1 = Arrays.asList(getResources().getStringArray(R.array.har_adi));
+            ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.layout_spinner_label, arrayList1);
+            arrayAdapter1.setDropDownViewResource(R.layout.layout_spinner_label);
+            spinAdiNumber.setAdapter(arrayAdapter);
+
+
+        }
 
 
         initListners();
@@ -116,9 +150,110 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         initSpinners();
 
         navigateToFragments();
+    }
+
+    private void getQualityPercentageFromSheet() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://script.google.com/macros/s/AKfycbxB6eqo6n7rPW1jzuGfJOxojLEqI_hfOMhcg3BCPc3ssnCrJ5o/exec?action=getHarData",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try{
+                            JSONObject jsonObject=new JSONObject(response);
+                            JSONArray jsonArray=jsonObject.getJSONArray("items");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                                String Combined     =jsonObject1.getString("combinedData");
+                                String Quality      =jsonObject1.getString("percent");
+
+                                ssCombinedData.add(Combined);
+                                ssPercentage.add(Quality);
+                            }
+
+
+
+                        }catch (JSONException e){e.printStackTrace();}
+
+
+                    }
+                },
+
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        int socketTimeOut = 50000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        stringRequest.setRetryPolicy(policy);
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(stringRequest);
+    }
+
+    private void getItems() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://script.google.com/macros/s/AKfycbwg5HBhqUaD8_anJooaGgWtWbzSrGA2iYnMdSqzYnOe8aSZsG9Y/exec?action=getHarNames",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try{
+                            JSONObject jsonObject=new JSONObject(response);
+                            JSONArray jsonArray=jsonObject.getJSONArray("items");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                                String name1=jsonObject1.getString("workersName");
+                                String adi1=jsonObject1.getString("adiCode");
+
+                                WorkersName.add(name1);
+                                ADICode.add(adi1);
+                            }
+
+
+                            setSpinner();
+
+
+
+                        }catch (JSONException e){e.printStackTrace();}
+
+
+
+                    }
+                },
+
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        int socketTimeOut = 50000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        stringRequest.setRetryPolicy(policy);
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(stringRequest);
 
     }
 
+
+
+    private void setSpinner() {
+
+        spinWorkerName.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, WorkersName));
+        spinAdiNumber.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, ADICode));
+
+
+    }
 
     private void initListners() {
 
@@ -132,6 +267,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                     spinJobName.setEnabled(false);
                     spinHousenumber.setEnabled(true);
+                    spinWorkerName.setEnabled(false);
                     validateHouseNumber();
 
                 }
@@ -157,9 +293,11 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 if (spinnerHouseNumber != null && spinnerHouseNumber.length() > 0 && !spinnerHouseNumber.equalsIgnoreCase("SELECT")) {
 
-                    spinJobName.setEnabled(true);
+                    spinJobName.setEnabled(false);
                     spinHousenumber.setEnabled(true);
-                    validateHouseNumber();
+                    spinWorkerName.setEnabled(true);
+                    validateWorker();
+
 
                 }
             }
@@ -171,6 +309,70 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
             }
         });
 
+    }
+
+    private void validateWorker() {
+
+        spinWorkerName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ApplicationUtils.hideKeypad(getApplicationContext(), spinWorkerName);
+
+                ApplicationUtils.hideKeypad(getApplicationContext(), spinAdiNumber);
+
+                spinnerWorkerName = parent.getItemAtPosition(position).toString();
+
+                workerPosition = spinWorkerName.getSelectedItemPosition();
+
+                spinAdiNumber.setSelection(workerPosition);
+
+                if (spinnerWorkerName != null && spinnerWorkerName.length() > 0 && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
+
+                    spinJobName.setEnabled(true);
+                    spinHousenumber.setEnabled(true);
+                    spinWorkerName.setEnabled(true);
+                    validateADI();
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+            }
+        });
+    }
+
+    private void validateADI() {
+
+        spinAdiNumber.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                adiNumber1 = parent.getItemAtPosition(workerPosition).toString();
+
+
+                if (adiNumber1 != null && adiNumber1.trim().length() > 0 && !adiNumber1.equalsIgnoreCase("SELECT")) {
+
+                    spinnerAdiNumber = adiNumber1;
+
+                    spinJobName.setEnabled(true);
+                    spinHousenumber.setEnabled(true);
+                    spinWorkerName.setEnabled(true);
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+            }
+        });
     }
 
 
@@ -249,7 +451,8 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         spinHousenumber.setAdapter(infoArrayAdapter);
 
         ApplicationUtils.hideKeypad(getApplicationContext(), spinAuditorName);
-
+        ApplicationUtils.hideKeypad(getApplicationContext(), spinAdiNumber);
+        ApplicationUtils.hideKeypad(getApplicationContext(), spinWorkerName);
 
 
 
@@ -286,6 +489,9 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         spinAuditorName.setSelection(0);
         spinJobName.setSelection(0);
         spinHousenumber.setSelection(0);
+        spinWorkerName.setSelection(0);
+        spinAdiNumber.setSelection(0);
+
 
     }
 
@@ -306,12 +512,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     DroppingFragment fragment = new DroppingFragment();
                     fragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, fragment);
@@ -323,12 +533,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     ClippingFragment clippingFragment = new ClippingFragment();
                     clippingFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, clippingFragment);
@@ -340,12 +554,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     DeleafingFragment deleafingFragment = new DeleafingFragment();
                     deleafingFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, deleafingFragment);
@@ -357,12 +575,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     PruningFragment pruningFragment = new PruningFragment();
                     pruningFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, pruningFragment);
@@ -374,12 +596,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     TwistingFragment twistingFragment = new TwistingFragment();
                     twistingFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, twistingFragment);
@@ -391,12 +617,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     PickingFragment pickingFragment = new PickingFragment();
                     pickingFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, pickingFragment);
@@ -408,12 +638,16 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
                     spinHousenumber.setEnabled(false);
+                    spinWorkerName.setEnabled(false);
+                    spinAdiNumber.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
                     bundle.putString("txtAuditorName", spinnerAuditorName);
                     bundle.putString("txtHouseNo", spinnerHouseNumber);
                     bundle.putString("txtWeekNo", spinnerWeekNumber);
+                    bundle.putString("txtWorkerName", spinnerWorkerName);
+                    bundle.putString("txtADICode", spinnerAdiNumber);
                     ClippingPruningFragment clippingPruningFragment = new ClippingPruningFragment();
                     clippingPruningFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frame_layout_main, clippingPruningFragment);
@@ -487,6 +721,28 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_files) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

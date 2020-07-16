@@ -18,34 +18,11 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:text="@string/lbl_worker_name" />
-
-
-
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spin_worker_name"
-                style="@style/Form.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp"/>
-
-
-
-
             <LinearLayout
                 android:id="@+id/linearLayoutDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:orientation="horizontal"
                 android:visibility="gone">
@@ -58,7 +35,6 @@
                     android:padding="@dimen/_10sdp"
                     android:layout_weight="1"
                     style="@style/Form.Label"
-
                     android:text="@string/lbl_quality_display" />
 
                 <TextView
@@ -79,7 +55,7 @@
                 android:id="@+id/input_row_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginLeft="@dimen/_2sdp">
 
                 <EditText
@@ -355,50 +331,52 @@
 
 
             <EditText
-                android:id="@+id/edt_comments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:hint="@string/lbl_comments_hint"
-                android:maxLines="8"
-                android:lines="5"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/border"
-                android:gravity="top|left"
-                android:scrollbars="vertical"
-                android:inputType="textMultiLine"
+                            android:id="@+id/edt_comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:hint="@string/lbl_comments_hint"
+                            android:maxLines="8"
+                            android:lines="5"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/border"
+                            android:gravity="top|left"
+                            android:scrollbars="vertical"
+                            android:inputType="textMultiLine"
 
-                />
-
-            <Spinner
-                android:id="@+id/spin_adi_number"
-                style="@style/Form.Label"
-                android:visibility="invisible"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp" />
-
-
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:background="@drawable/custom_button"
-                android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:text="@string/lbl_submit"
-                android:layout_marginBottom="@dimen/_20sdp"/>
+                            />
+            <!-- <Spinner
+                 android:id="@+id/spin_comments"
+                 style="@style/Form.Label"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/_5sdp"
+                 android:layout_marginBottom="@dimen/_5sdp"
+                 android:layout_marginLeft="@dimen/_5sdp"
+                 android:layout_marginRight="@dimen/_5sdp" />-->
 
 
 
-        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+             <Button
+                 android:id="@+id/btn_submit"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="@dimen/_10sdp"
+                 android:layout_marginTop="@dimen/_25sdp"
+                 android:background="@drawable/custom_button"
+                 android:textColor="@color/white"
+                 android:layout_marginLeft="@dimen/_10sdp"
+                 android:layout_marginRight="@dimen/_10sdp"
+                 android:text="@string/lbl_submit"
+                 android:layout_marginBottom="@dimen/_20sdp"/>
 
 
-</LinearLayout>
+
+         </LinearLayout>
+
+     </androidx.core.widget.NestedScrollView>
+
+
+ </LinearLayout>
