@@ -172,11 +172,9 @@ public class PickingFragment extends BaseFragment<PickingFragmentPresenter> impl
         btnSubmit.setOnClickListener(this);
 
 
-        if(ApplicationUtils.isConnected(mActivity)){
+        getQualityPercentageFromSheet();
 
-            getQualityPercentageFromSheet();
 
-        }
         initSpinners();
 
 

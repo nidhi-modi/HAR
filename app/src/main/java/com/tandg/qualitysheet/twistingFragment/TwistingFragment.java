@@ -171,12 +171,11 @@ public class TwistingFragment extends BaseFragment<TwistingFragmentPresenter> im
         btnSubmit.setOnClickListener(this);
 
 
-        if(ApplicationUtils.isConnected(mActivity)){
+        getQualityPercentageFromSheet();
 
-            getQualityPercentageFromSheet();
 
-        }
         initSpinners();
+
 
 
 
