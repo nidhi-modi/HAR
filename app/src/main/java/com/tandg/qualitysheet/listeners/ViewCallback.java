@@ -7,9 +7,7 @@ package com.tandg.qualitysheet.listeners;
 
 public interface ViewCallback {
 
-    void sendDataAuditorFragments(String auditorName);
-    void sendDataHouseFragments(String houseNo);
-    void sendDataWeekFragments(String weekNo);
+    void freezeComponent(boolean b);
 
 
 }

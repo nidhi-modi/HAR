@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Handler;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,7 +53,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> implements QualitySheetContract.View, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> implements QualitySheetContract.View, View.OnClickListener, AdapterView.OnItemSelectedListener, ViewCallback {
 
     private static final String TAG = QualitySheetActivity.class.getSimpleName();
 
@@ -514,6 +515,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -535,6 +537,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -556,6 +559,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -577,6 +581,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -598,6 +603,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -619,6 +625,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -640,6 +647,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
+                    spinJobName.setEnabled(false);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Bundle bundle = new Bundle();
                     bundle.putString("txtJobName", spinnerJobName);
@@ -745,4 +753,19 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void freezeComponent(boolean b) {
+
+        Log.e(TAG, "freezeComponent: "+b );
+
+        if(!b){
+
+            spinJobName.setEnabled(true);
+
+        }else{
+
+            spinJobName.setEnabled(false);
+
+        }
+    }
 }
