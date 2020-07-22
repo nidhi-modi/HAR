@@ -266,6 +266,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 if (spinnerAuditorName != null && spinnerAuditorName.length() > 0 && !spinnerAuditorName.equalsIgnoreCase("SELECT")) {
 
+                    spinAuditorName.setEnabled(true);
                     spinJobName.setEnabled(false);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(false);
@@ -294,6 +295,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 if (spinnerHouseNumber != null && spinnerHouseNumber.length() > 0 && !spinnerHouseNumber.equalsIgnoreCase("SELECT")) {
 
+                    spinAuditorName.setEnabled(true);
                     spinJobName.setEnabled(false);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);
@@ -330,6 +332,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 if (spinnerWorkerName != null && spinnerWorkerName.length() > 0 && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
+                    spinAuditorName.setEnabled(true);
                     spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);
@@ -359,7 +362,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                 if (adiNumber1 != null && adiNumber1.trim().length() > 0 && !adiNumber1.equalsIgnoreCase("SELECT")) {
 
                     spinnerAdiNumber = adiNumber1;
-
+                    spinAuditorName.setEnabled(true);
                     spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);

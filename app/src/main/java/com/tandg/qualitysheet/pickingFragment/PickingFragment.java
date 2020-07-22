@@ -175,7 +175,16 @@ public class PickingFragment extends BaseFragment<PickingFragmentPresenter> impl
         btnSubmit.setOnClickListener(this);
 
 
-        getQualityPercentageFromSheet();
+        if(ApplicationUtils.isConnected(mActivity)) {
+
+            getQualityPercentageFromSheet();
+
+        }else{
+
+            mListener.freezeComponent(false);
+            displayPercentageData();
+        }
+
 
 
         initSpinners();
@@ -241,7 +250,7 @@ public class PickingFragment extends BaseFragment<PickingFragmentPresenter> impl
 
             qualityInfoDataSource.open();
 
-            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(workerName1, argJobName);
+            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(argWorkerName, argJobName);
 
             qualityInfoDataSource.close();
 

@@ -174,7 +174,16 @@ public class TwistingFragment extends BaseFragment<TwistingFragmentPresenter> im
         btnSubmit.setOnClickListener(this);
 
 
-        getQualityPercentageFromSheet();
+        if(ApplicationUtils.isConnected(mActivity)) {
+
+            getQualityPercentageFromSheet();
+
+        }else{
+
+            mListener.freezeComponent(false);
+            displayPercentageData();
+        }
+
 
 
         initSpinners();
@@ -241,7 +250,7 @@ public class TwistingFragment extends BaseFragment<TwistingFragmentPresenter> im
 
             qualityInfoDataSource.open();
 
-            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(workerName1, argJobName);
+            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(argWorkerName, argJobName);
 
             qualityInfoDataSource.close();
 
@@ -290,7 +299,6 @@ public class TwistingFragment extends BaseFragment<TwistingFragmentPresenter> im
                             mListener.freezeComponent(false);
 
                         }catch (JSONException e){e.printStackTrace();}
-
 
                     }
                 },

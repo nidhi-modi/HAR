@@ -185,7 +185,16 @@ public class ClippingFragment extends BaseFragment<ClippingFragmentPresenter> im
         radioClippingData1yes.startAnimation(animation);
         radioClippingData1no.startAnimation(animation);*/
 
-        getQualityPercentageFromSheet();
+        if(ApplicationUtils.isConnected(mActivity)) {
+
+            getQualityPercentageFromSheet();
+
+        }else{
+
+            mListener.freezeComponent(false);
+            displayPercentageData();
+        }
+
 
 
         initSpinners();
@@ -249,7 +258,7 @@ public class ClippingFragment extends BaseFragment<ClippingFragmentPresenter> im
 
             qualityInfoDataSource.open();
 
-            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(workerName1, argJobName);
+            globalQualityInfo = qualityInfoDataSource.getQualityInfoByJobAndWorkerName(argWorkerName, argJobName);
 
             qualityInfoDataSource.close();
 
