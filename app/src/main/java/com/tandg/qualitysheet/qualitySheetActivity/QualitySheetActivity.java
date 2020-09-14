@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -104,9 +105,10 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         DependencyInjector.appComponent().inject(this);
 
 
-        spinJobName.setEnabled(false);
-        spinHousenumber.setEnabled(false);
-        spinWorkerName.setEnabled(false);
+        //spinJobName.setEnabled(false);
+        spinHousenumber.setEnabled(true);
+        spinWorkerName.setEnabled(true);
+        spinAuditorName.setEnabled(true);
 
         WorkersName       = new ArrayList<>();
         ADICode           = new ArrayList<>();
@@ -267,9 +269,9 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                 if (spinnerAuditorName != null && spinnerAuditorName.length() > 0 && !spinnerAuditorName.equalsIgnoreCase("SELECT")) {
 
                     spinAuditorName.setEnabled(true);
-                    spinJobName.setEnabled(false);
+                    spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
-                    spinWorkerName.setEnabled(false);
+                    spinWorkerName.setEnabled(true);
                     validateHouseNumber();
 
                 }
@@ -285,6 +287,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
     }
 
+
     private void validateHouseNumber() {
 
         spinHousenumber.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -296,7 +299,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                 if (spinnerHouseNumber != null && spinnerHouseNumber.length() > 0 && !spinnerHouseNumber.equalsIgnoreCase("SELECT")) {
 
                     spinAuditorName.setEnabled(true);
-                    spinJobName.setEnabled(false);
+                    spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);
                     validateWorker();
@@ -331,8 +334,8 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                 spinAdiNumber.setSelection(workerPosition);
 
                 if (spinnerWorkerName != null && spinnerWorkerName.length() > 0 && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
-
                     spinAuditorName.setEnabled(true);
+
                     spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);
@@ -358,16 +361,19 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 adiNumber1 = parent.getItemAtPosition(workerPosition).toString();
 
-
                 if (adiNumber1 != null && adiNumber1.trim().length() > 0 && !adiNumber1.equalsIgnoreCase("SELECT")) {
 
                     spinnerAdiNumber = adiNumber1;
                     spinAuditorName.setEnabled(true);
+
                     spinJobName.setEnabled(true);
                     spinHousenumber.setEnabled(true);
                     spinWorkerName.setEnabled(true);
 
 
+                }else {
+
+                    Log.e(TAG, "Adapter is null" );
                 }
             }
 
@@ -378,6 +384,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
             }
         });
     }
+
 
 
     private void navigateToFragments() {
@@ -511,7 +518,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
 
                 jobName = adapterView.getItemAtPosition(i).toString();
 
-                if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Dropping")) {
+                if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Dropping") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -533,7 +540,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.addToBackStack("tag");
                     fragmentTransaction.commitAllowingStateLoss();
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Clipping")) {
+                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Clipping") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -555,7 +562,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.commitAllowingStateLoss();
 
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Deleafing")) {
+                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Deleafing") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -577,7 +584,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.commitAllowingStateLoss();
 
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Pruning")) {
+                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Pruning") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -599,7 +606,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.commitAllowingStateLoss();
 
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Twisting")) {
+                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Twisting") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -621,7 +628,7 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.commitAllowingStateLoss();
 
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Picking")) {
+                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Picking") && !spinnerAuditorName.equalsIgnoreCase("SELECT") && spinnerAuditorName!= null && spinnerWorkerName != null && spinnerHouseNumber != null && !spinnerHouseNumber.equalsIgnoreCase("SELECT") && !spinnerWorkerName.equalsIgnoreCase("SELECT")) {
 
                     spinnerJobName = jobName;
                     spinAuditorName.setEnabled(false);
@@ -643,31 +650,14 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                     fragmentTransaction.commitAllowingStateLoss();
 
 
-                } else if (jobName != null && jobName.trim().length() > 0 && !jobName.equalsIgnoreCase("SELECT") && jobName.equalsIgnoreCase("Clipping/Pruning")) {
+                } else if (jobName.equalsIgnoreCase("SELECT")) {
 
-                    spinnerJobName = jobName;
-                    spinAuditorName.setEnabled(false);
+                    clearSpinners();
+                    spinAuditorName.setEnabled(true);
                     spinHousenumber.setEnabled(false);
                     spinWorkerName.setEnabled(false);
                     spinAdiNumber.setEnabled(false);
                     spinJobName.setEnabled(false);
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("txtJobName", spinnerJobName);
-                    bundle.putString("txtAuditorName", spinnerAuditorName);
-                    bundle.putString("txtHouseNo", spinnerHouseNumber);
-                    bundle.putString("txtWeekNo", spinnerWeekNumber);
-                    bundle.putString("txtWorkerName", spinnerWorkerName);
-                    bundle.putString("txtADICode", spinnerAdiNumber);
-                    ClippingPruningFragment clippingPruningFragment = new ClippingPruningFragment();
-                    clippingPruningFragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.frame_layout_main, clippingPruningFragment);
-                    fragmentTransaction.commitAllowingStateLoss();
-
-
-                } else if (jobName.equalsIgnoreCase("SELECT")) {
-
-                    clearSpinners();
                     Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_layout_main);
                     if (fragment != null) {
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -675,10 +665,15 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
                         fragmentTransaction.commit();
                     }
 
+                }else {
+
+                    clearSpinners();
+                    Toast.makeText(getApplicationContext(),"Please fill all the drop boxes",Toast.LENGTH_SHORT).show();
                 }
 
 
                 break;
+
 
             case R.id.spin_auditor_name:
 
