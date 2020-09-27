@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tandg.qualitysheet">
+    package="com.tandg.harqualitysheet">
 
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -17,20 +17,20 @@
     <uses-feature android:name="android.hardware.bluetooth" />
 
     <application
-        android:name=".utils.AppContext"
+        android:name="com.tandg.harqualitysheet.utils.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/tandg_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".clippingPruningFragment.ClippingPruningFragment"></activity>
+        <activity android:name="com.tandg.harqualitysheet.clippingPruningFragment.ClippingPruningFragment"></activity>
         <activity
-            android:name=".qualitySheetActivity.QualitySheetActivity"
+            android:name="com.tandg.harqualitysheet.qualitySheetActivity.QualitySheetActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".droppingFragment.DroppingFragment" />
+        <activity android:name="com.tandg.harqualitysheet.droppingFragment.DroppingFragment" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.tandg.harqualitysheet.SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,13 +41,13 @@
         </activity>
 
         <service
-            android:name=".services.MyBackgroundService"
+            android:name="com.tandg.harqualitysheet.services.MyBackgroundService"
             android:exported="false"></service>
 
-        <receiver android:name=".receivers.BootLoaderReciever" />
-        <receiver android:name=".receivers.AlarmReceiver"></receiver>
+        <receiver android:name="com.tandg.harqualitysheet.receivers.BootLoaderReciever" />
+        <receiver android:name="com.tandg.harqualitysheet.receivers.AlarmReceiver"></receiver>
         <receiver
-            android:name=".receivers.SchedulerSetupReceiver"
+            android:name="com.tandg.harqualitysheet.receivers.SchedulerSetupReceiver"
             android:process=":remote">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
