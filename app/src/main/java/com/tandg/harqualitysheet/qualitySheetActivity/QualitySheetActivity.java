@@ -437,6 +437,8 @@ public class QualitySheetActivity extends BaseActivity<QualitySheetPresenter> im
         arrayList.add(new SpinInfo(3, "Gerard Snyman"));
         arrayList.add(new SpinInfo(4, "Herman Fourie"));
         arrayList.add(new SpinInfo(5, "Fusi Pai Tonga"));
+        arrayList.add(new SpinInfo(5, "Taufa Filiai"));
+
 
 
 
